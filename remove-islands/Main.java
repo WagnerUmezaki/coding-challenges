@@ -55,47 +55,54 @@ public class Main {
     }
 
     private static boolean findPathToBorder(final int[][] matrix, int row, int col, Set<String> visited, Set<String> pathCache) {
-        final String visitedCoordKey = row + "" + col; 
-        if(pathCache.contains(visitedCoordKey)){
-            return true;
-        }
+        final String coordKey = row + "" + col; 
 
-        if(matrix[row][col] == 1 && (row == 0 || col == 0 || row == matrix.length -1 || col == matrix[0].length -1)) {
-            pathCache.add(visitedCoordKey);
+        // Verify cache
+        if(pathCache.contains(coordKey)){
             return true;
         }
         
-        if(visited.contains(visitedCoordKey)) {
+        // Verify if the recursion already visited this coordinate
+        if(visited.contains(coordKey)) {
             return false;
         }
 
-        visited.add(visitedCoordKey);
+        // mark as visited
+        visited.add(coordKey);
+
+        // if its 1, and is a border, so populate cache, and return true.
+        if(matrix[row][col] == 1 && (row == 0 || col == 0 || row == matrix.length -1 || col == matrix[0].length -1)) {
+            pathCache.add(coordKey);
+            return true;
+        }
+        
+        // if its 1, starts recurstion, if finds a path of 1's to border stores in cache, and return true.
         if(matrix[row][col] == 1) {
             if(row-1 >= 0){
                 boolean tryUp = findPathToBorder(matrix, row-1, col, visited, pathCache);
                 if(tryUp) {
-                    pathCache.add(visitedCoordKey);
+                    pathCache.add(coordKey);
                     return true;
                 }
             }
             if(col+1 < matrix[0].length) {
                 boolean tryRight = findPathToBorder(matrix, row, col+1, visited, pathCache);
                 if(tryRight) {
-                    pathCache.add(visitedCoordKey);
+                    pathCache.add(coordKey);
                     return true;
                 }
             }
             if(row+1 < matrix.length) {
                 boolean tryDown = findPathToBorder(matrix, row+1, col, visited, pathCache);
                 if(tryDown) {
-                    pathCache.add(visitedCoordKey);
+                    pathCache.add(coordKey);
                     return true;
                 }
             }
             if(col-1 >= 0) {
                 boolean tryLeft = findPathToBorder(matrix, row, col-1, visited, pathCache);
                 if(tryLeft) {
-                    pathCache.add(visitedCoordKey);
+                    pathCache.add(coordKey);
                     return true;
                 }
             }
