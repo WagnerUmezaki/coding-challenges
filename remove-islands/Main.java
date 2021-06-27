@@ -42,11 +42,11 @@ public class Main {
     }
 
     private static void removeIslands(final int[][] matrix) {
-        final Set<String> pathCache = new HashSet<>();
+        final Set<List<Integer>> pathCache = new HashSet<>();
         for(int i=0; i<matrix.length; i++) {
             for(int j=0; j<matrix[i].length; j++) {
                 if(matrix[i][j] == 1) {
-                    if(!findPathToBorder(matrix, i, j, new HashSet<String>(), pathCache)) {
+                    if(!findPathToBorder(matrix, i, j, new HashSet<List<Integer>>(), pathCache)) {
                         matrix[i][j] = 0;
                     }
                 }
@@ -54,8 +54,8 @@ public class Main {
         }
     }
 
-    private static boolean findPathToBorder(final int[][] matrix, int row, int col, Set<String> visited, Set<String> pathCache) {
-        final String coordKey = row + "" + col; 
+    private static boolean findPathToBorder(final int[][] matrix, int row, int col, Set<List<Integer>> visited, Set<List<Integer>> pathCache) {
+        final List<Integer> coordKey = Arrays.asList(row, col); 
 
         // Verify cache
         if(pathCache.contains(coordKey)){
