@@ -117,7 +117,7 @@ public class Sudoku {
             final Set<Integer> valuesOnRow = new HashSet<>();
             for(int j=0; j<WIDTH; j++) {
                 if(get(i,j) != null){
-                    if(valuesOnRow.contains(get(i,j) )) {
+                    if(valuesOnRow.contains(get(i,j))) {
                         return false;
                     }
                     valuesOnRow.add(get(i,j));
@@ -128,11 +128,11 @@ public class Sudoku {
         for(int i=0; i<WIDTH; i++) {
             final Set<Integer> valuesOnColumn = new HashSet<>();
             for(int j=0; j<HEIGHT; j++) {
-                if(get(i,j) != null){
-                    if(valuesOnColumn.contains(get(i,j) )) {
+                if(get(j,i) != null){
+                    if(valuesOnColumn.contains(get(j,i))) {
                         return false;
                     }
-                    valuesOnColumn.add(get(i,j));
+                    valuesOnColumn.add(get(j,i));
                 }
             }
         }
@@ -143,7 +143,7 @@ public class Sudoku {
                 for(int sectionI=i; sectionI<i+3; sectionI++){
                     for(int sectionJ=j; sectionJ<j+3; sectionJ++){
                         if(get(sectionI, sectionJ) != null) {
-                            if(valuesOnSection.contains(get(sectionI,sectionJ) )) {
+                            if(valuesOnSection.contains(get(sectionI,sectionJ))) {
                                 return false;
                             }
                             valuesOnSection.add(get(sectionI, sectionJ));
