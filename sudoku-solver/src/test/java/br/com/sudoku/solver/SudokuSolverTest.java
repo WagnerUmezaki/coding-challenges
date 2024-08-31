@@ -86,6 +86,37 @@ public class SudokuSolverTest {
         Assert.assertEquals(solution.get(8, 6), sudoku.get(8, 6));
     }
 
+    /**
+     * -------------------------------
+     * |         |         |         |
+     * |         |         |         |
+     * |         |         |         |
+     * -------------------------------
+     * |         |         |         |
+     * |         |         |         |
+     * |         |         |         |
+     * -------------------------------
+     * |         |         |         |
+     * |         |         |         |
+     * | 1     2 |         |         |
+     * -------------------------------
+     */
+    @Test
+    public void initializedValidSudoku2(){
+        final Sudoku sudoku = new Sudoku();
+        sudoku.put(8, 0, 1);
+        sudoku.put(8, 2, 2);
+        System.out.println("Problem");
+        System.out.println(sudoku);
+        final Sudoku solution = new SudokuSolver(sudoku).solve();
+        System.out.println(solution);
+        Assert.assertNotNull(solution);
+        Assert.assertTrue(solution.isCompleted());
+
+        Assert.assertEquals(solution.get(8, 0), sudoku.get(8, 0));
+        Assert.assertEquals(solution.get(8, 2), sudoku.get(8, 2));
+    }
+
     @Test
     public void invalidSudoku() {
         final Sudoku sudoku = new Sudoku();
